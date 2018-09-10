@@ -1,5 +1,5 @@
 # Study  
-# 목차  
+## 목차  
 [1. GIT / GITHUB](#1-git--github)  
 [2. Docker](#2-docker)  
 > [1. Container 란](#1-container-란)  

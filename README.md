@@ -1,7 +1,7 @@
 # Study
 
 [1. GIT / GITHUB](#1-git--github)  
-[2. Docker](#2-docker-란)
+[2. Docker](#2-docker)
 
 > 마크다운 참조 링크 : [링크1](https://gist.github.com/ihoneymon/652be052a0727ad59601#23-%EB%AA%A9%EB%A1%9D) / [링크2](https://heropy.blog/2017/09/30/markdown/) / [링크3](https://wikidocs.net/1678#_1)  
 > 하루패드 : [하루패드 다운로드 링크](http://pad.haroopress.com/user.html)  

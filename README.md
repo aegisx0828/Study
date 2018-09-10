@@ -1,10 +1,10 @@
 #Study
 
-[1. GIT / GITHUB](#1-git-과-github의-차이는)
-[2. Docker](#2-docker-란)
-> [1. Container 란]()
-> [2. Image 란]()
-> [3. Layer 란]()
+[1. GIT / GITHUB](#1-git-과-github의-차이는)  
+[2. Docker](#2-docker-란)  
+> [1. Container 란]()  
+> [2. Image 란]()  
+> [3. Layer 란]()  
 
 
  마크다운 참조 링크 : [링크1](https://gist.github.com/ihoneymon/652be052a0727ad59601#23-%EB%AA%A9%EB%A1%9D) / [링크2](https://heropy.blog/2017/09/30/markdown/) / [링크3](https://wikidocs.net/1678#_1)  

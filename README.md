@@ -1,10 +1,14 @@
-# Study
+#Study
 
-[1. GIT / GITHUB](#1-git--github)  
-[2. Docker](#2-docker)
+[1. GIT / GITHUB](#1-git-과-github의-차이는)
+[2. Docker](#2-docker-란)
+> [1. Container 란]()
+> [2. Image 란]()
+> [3. Layer 란]()
 
-> 마크다운 참조 링크 : [링크1](https://gist.github.com/ihoneymon/652be052a0727ad59601#23-%EB%AA%A9%EB%A1%9D) / [링크2](https://heropy.blog/2017/09/30/markdown/) / [링크3](https://wikidocs.net/1678#_1)  
-> 하루패드 : [하루패드 다운로드 링크](http://pad.haroopress.com/user.html)  
+
+ 마크다운 참조 링크 : [링크1](https://gist.github.com/ihoneymon/652be052a0727ad59601#23-%EB%AA%A9%EB%A1%9D) / [링크2](https://heropy.blog/2017/09/30/markdown/) / [링크3](https://wikidocs.net/1678#_1)  
+ 하루패드 : [하루패드 다운로드 링크](http://pad.haroopress.com/user.html)  
 
 
 
@@ -29,3 +33,4 @@
 ### 3. Layer 란
 > - Container와 Image를 효율적으로 관리하기 위해 사용하는 방식
 > <img width="500" src="https://subicura.com/assets/article_images/2017-01-19-docker-guide-for-beginners-1/image-layer.png">  
+

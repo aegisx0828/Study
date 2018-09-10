@@ -23,6 +23,7 @@
 ## 2. Docker
 * Docker는 컨테이너 기반의 오픈소스 가상화 플랫폼  
 	- [Docker 참고 URL](https://subicura.com/2017/01/19/docker-guide-for-beginners-1.html)  
+	- [Docker 참고 URL2](https://seunguklee.github.io/2018/02/13/what-is-docker/#%EB%8F%84%EC%BB%A4-Docker-%EB%9E%80-%EB%AC%B4%EC%97%87%EC%9D%B8%EA%B0%80)
 
 ### 1. Container 란
 > - 격리된 공간에서 프로세스가 동작하는 기술

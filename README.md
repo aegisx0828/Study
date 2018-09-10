@@ -1,5 +1,5 @@
 #Study
-
+#목차
 [1. GIT / GITHUB](#1-git--github)  
 [2. Docker](#2-docker)  
 > [1. Container 란](#1-container-란)  
@@ -10,7 +10,7 @@
  마크다운 참조 링크 : [링크1](https://gist.github.com/ihoneymon/652be052a0727ad59601#23-%EB%AA%A9%EB%A1%9D) / [링크2](https://heropy.blog/2017/09/30/markdown/) / [링크3](https://wikidocs.net/1678#_1)  
  하루패드 : [하루패드 다운로드 링크](http://pad.haroopress.com/user.html)  
 
-
+---
 
 ## 1. GIT / GITHUB
 * GIT 은 일반적인 SVN과 같은 소스 버전 관리 시스템을 말한다. 또한 분산 버전 관리 시스템이다.  

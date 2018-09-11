@@ -40,25 +40,25 @@
 1. Docker 설치  
 * Docker 공홈에서 파일 다운로드 후 설치 [링크](https://store.docker.com/editions/community/docker-ce-desktop-mac?tab=description)  
 * 설치 완료 후 Docker 실행 할 때, 꼭 계정(이메일이 아닌 ID)을 저장하여 Docker를 실행한다.
-> docker 명령어 테스트 할 경우, docker hub에 있는 소스 파일들을 가져와야 하기 때문이다.
+	* docker 명령어 테스트 할 경우, docker hub에 있는 소스 파일들을 가져와야 하기 때문이다.
 * Docker가 정상적으로 설치 되었나, 확인하는 명령어 목록
->```bash
->## List Docker CLI commands
->docker
->docker container --help
->## Display Docker version and info
->docker --version
->docker version
->docker info
->## Execute Docker image
->docker run hello-world
->## List Docker images
->docker image ls
->## List Docker containers (running, all, all in quiet mode)
->docker container ls
->docker container ls --all
->docker container ls -aq
->```
+```bash
+## List Docker CLI commands
+docker
+docker container --help
+## Display Docker version and info
+docker --version
+docker version
+docker info
+## Execute Docker image
+docker run hello-world
+## List Docker images
+docker image ls
+## List Docker containers (running, all, all in quiet mode)
+docker container ls
+docker container ls --all
+docker container ls -aq
+```
 
 
 

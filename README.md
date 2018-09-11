@@ -35,3 +35,36 @@
 > - Container와 Image를 효율적으로 관리하기 위해 사용하는 방식
 > <img width="500" src="https://subicura.com/assets/article_images/2017-01-19-docker-guide-for-beginners-1/image-layer.png">  
 
+### 4. Docker 환경 설정
+[참고링크](https://docs.docker.com/)
+1. Docker 설치  
+* Docker 공홈에서 파일 다운로드 후 설치 [링크](https://store.docker.com/editions/community/docker-ce-desktop-mac?tab=description)  
+* 설치 완료 후 Docker 실행 할 때, 꼭 계정(이메일이 아닌 ID)을 저장하여 Docker를 실행한다.
+> docker 명령어 테스트 할 경우, docker hub에 있는 소스 파일들을 가져와야 하기 때문이다.
+* Docker가 정상적으로 설치 되었나, 확인하는 명령어 목록
+>```bash
+>## List Docker CLI commands
+>docker
+>docker container --help
+>## Display Docker version and info
+>docker --version
+>docker version
+>docker info
+>## Execute Docker image
+>docker run hello-world
+>## List Docker images
+>docker image ls
+>## List Docker containers (running, all, all in quiet mode)
+>docker container ls
+>docker container ls --all
+>docker container ls -aq
+>```
+
+
+
+
+
+
+---
+## 3. 쓸데없는 개발 참조
+* MAC 터미널 글꼴 색상 적용 : [링크](http://minus-build.tistory.com/23)

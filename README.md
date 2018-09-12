@@ -42,23 +42,23 @@
 	* 설치 완료 후 Docker 실행 할 때, 꼭 계정(이메일이 아닌 ID)을 저장하여 Docker를 실행한다.
 		* docker 명령어 테스트 할 경우, docker hub에 있는 소스 파일들을 가져와야 하기 때문이다.
 	* 아래는 Docker가 정상적으로 설치 되었나 확인하는 명령어 목록이다.
-```bash
-## List Docker CLI commands
-docker
-docker container --help
-## Display Docker version and info
-docker --version
-docker version
-docker info
-## Execute Docker image
-docker run hello-world
-## List Docker images
-docker image ls
-## List Docker containers (running, all, all in quiet mode)
-docker container ls
-docker container ls --all
-docker container ls -aq
-```
+	```bash
+	## List Docker CLI commands
+	docker
+	docker container --help
+	## Display Docker version and info
+	docker --version
+	docker version
+	docker info
+	## Execute Docker image
+	docker run hello-world
+	## List Docker images
+	docker image ls
+	## List Docker containers (running, all, all in quiet mode)
+	docker container ls
+	docker container ls --all
+	docker container ls -aq
+	```
 2. Dockerfile 정의
 	* 컨테이너 내부 환경을 정의함
 	* 런타임 실행 환경에 대한 이미지 파일 생성에 필요한 정보가 들어가 있음
@@ -87,12 +87,12 @@ docker container ls -aq
 3. 실제 구동할 APP 런타임 소스 작성
 	* requirements.txt
 	```txt
-    Flask
+    	Flask
 	Redis
-    ```
-    * app.py
-    ```python
-    from flask import Flask
+    	```
+    	* app.py
+    	```python
+    	from flask import Flask
 	from redis import Redis, RedisError
 	import os
 	import socket
@@ -104,20 +104,20 @@ docker container ls -aq
 
 	@app.route("/")
 	def hello():
-    try:
-        visits = redis.incr("counter")
-    except RedisError:
-        visits = "<i>cannot connect to Redis, counter disabled</i>"
+    	try:
+        	visits = redis.incr("counter")
+    	except RedisError:
+        	visits = "<i>cannot connect to Redis, counter disabled</i>"
 
-    html = "<h3>Hello {name}!</h3>" \
-           "<b>Hostname:</b> {hostname}<br/>" \
-           "<b>Visits:</b> {visits}"
-    return html.format(name=os.getenv("NAME", "world"), hostname=socket.gethostname(), visits=visits)
+    		html = "<h3>Hello {name}!</h3>" \
+           	"<b>Hostname:</b> {hostname}<br/>" \
+           	"<b>Visits:</b> {visits}"
+    	return html.format(name=os.getenv("NAME", "world"), hostname=socket.gethostname(), visits=visits)
 
 	if __name__ == "__main__":
-    app.run(host='0.0.0.0', port=80)
+    	app.run(host='0.0.0.0', port=80)
 
-    ```
+    	```
 4. Image 생성
 	* docker build -t 명령어를 이용하여 Image를 생성
 	```bash

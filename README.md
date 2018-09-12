@@ -87,12 +87,12 @@
 3. 실제 구동할 APP 런타임 소스 작성
 	* requirements.txt
 	```txt
-    	Flask
+    Flask
 	Redis
-    	```
-    	* app.py
-    	```python
-    	from flask import Flask
+    ```
+    * app.py
+    ```python
+    from flask import Flask
 	from redis import Redis, RedisError
 	import os
 	import socket
@@ -104,20 +104,20 @@
 
 	@app.route("/")
 	def hello():
-    	try:
-        	visits = redis.incr("counter")
-    	except RedisError:
-        	visits = "<i>cannot connect to Redis, counter disabled</i>"
+    try:
+        visits = redis.incr("counter")
+    except RedisError:
+        visits = "<i>cannot connect to Redis, counter disabled</i>"
 
-    		html = "<h3>Hello {name}!</h3>" \
-           	"<b>Hostname:</b> {hostname}<br/>" \
-           	"<b>Visits:</b> {visits}"
-    	return html.format(name=os.getenv("NAME", "world"), hostname=socket.gethostname(), visits=visits)
+    html = "<h3>Hello {name}!</h3>" \
+           "<b>Hostname:</b> {hostname}<br/>" \
+           "<b>Visits:</b> {visits}"
+    return html.format(name=os.getenv("NAME", "world"), hostname=socket.gethostname(), visits=visits)
 
 	if __name__ == "__main__":
-    	app.run(host='0.0.0.0', port=80)
+    app.run(host='0.0.0.0', port=80)
 
-    	```
+    ```
 4. Image 생성
 	* docker build -t 명령어를 이용하여 Image를 생성
 	```bash

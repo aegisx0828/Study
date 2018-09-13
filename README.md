@@ -132,8 +132,8 @@
 	* localhost:4000 으로 브라우저에서 확인함(실제 0.0.0.0/80 으로 구동이 되었지만 docker에서 run을 할때, 4000 포트로 매핑을 해주었기 때문에 4000 포트로 확인)
 	* 아래 명령어로 실행되고 있는 container 가 있는지 확인
 	```bash
-    	docker container ls
-    	```
+    docker container ls
+    ```
 7. 실행 중인 컨테이너 중단
 	* 아래 명렁어를 통하여 실행중인 컨테이너를 중지 시킴
 	```bash

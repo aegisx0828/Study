@@ -279,4 +279,6 @@ Status: Downloaded newer image for gordon/get-started:part2
 ## 3. 쓸데없는 개발 참조
 
 - MAC 터미널 글꼴 색상 적용 : [링크](http://minus-build.tistory.com/23)
-- Oracle VirtualBox 설치 : [링크](
+- Oracle VirtualBox 설치 : [링크](https://hongku.tistory.com/178)
+
+

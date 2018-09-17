@@ -1,4 +1,4 @@
-# Study  
+Study  
 
 ## 목차  
 
@@ -48,155 +48,229 @@
 
 [참고링크](https://docs.docker.com/)
 
-1. Docker 설치
 
-   - Docker 공홈에서 파일 다운로드 후 설치 [링크](https://store.docker.com/editions/community/docker-ce-desktop-mac?tab=description)
-   - 설치 완료 후 Docker 실행 할 때, 꼭 계정(이메일이 아닌 ID)을 저장하여 Docker를 실행한다.
-     - docker 명령어 테스트 할 경우, docker hub에 있는 소스 파일들을 가져와야 하기 때문이다.
-   - 아래는 Docker가 정상적으로 설치 되었나 확인하는 명령어 목록이다.
 
-   ```bash
-   ## List Docker CLI commands
-   docker
-   docker container --help
-   ## Display Docker version and info
-   docker --version
-   docker version
-   docker info
-   ## Execute Docker image
-   docker run hello-world
-   ## List Docker images
-   docker image ls
-   ## List Docker containers (running, all, all in quiet mode)
-   docker container ls
-   docker container ls --all
-   docker container ls -aq
-   ```
+#### Docker 설치
 
-2. Dockerfile 정의
+Docker 공홈에서 파일 다운로드 후 설치 [링크](https://store.docker.com/editions/community/docker-ce-desktop-mac?tab=description)
 
-   - 컨테이너 내부 환경을 정의함
-   - 런타임 실행 환경에 대한 이미지 파일 생성에 필요한 정보가 들어가 있음
+설치 완료 후 Docker 실행 할 때, 꼭 계정(이메일이 아닌 ID)을 저장하여 Docker를 실행한다.
 
-   ```bash
-   # Use an official Python runtime as a parent image
-   FROM python:2.7-slim
-   
-   # Set the working directory to /app
-   WORKDIR /app
-   
-   # Copy the current directory contents into the container at /app
-   ADD . /app
-   
-   # Install any needed packages specified in requirements.txt
-   RUN pip install --trusted-host pypi.python.org -r requirements.txt
-   
-   # Make port 80 available to the world outside this container
-   EXPOSE 80
-   
-   # Define environment variable
-   ENV NAME World
-   
-   # Run app.py when the container launches
-   CMD ["python", "app.py"]
-   ```
+docker 명령어 테스트 할 경우, docker hub에 있는 소스 파일들을 가져와야 하기 때문이다.
 
-3. 실제 구동할 APP 런타임 소스 작성
+아래는 Docker가 정상적으로 설치 되었나 확인하는 명령어 목록이다.
 
-   - requirements.txt
+```bash
+## List Docker CLI commands
+docker
+docker container --help
+## Display Docker version and info
+docker --version
+docker version
+docker info
+## Execute Docker image
+docker run hello-world
+## List Docker images
+docker image ls
+## List Docker containers (running, all, all in quiet mode)
+docker container ls
+docker container ls --all
+docker container ls -aq
+```
 
-   ```txt
-   Flask
-   Redis
-   ```
 
-   - app.py
 
-   ```python
-     from flask import Flask
-   from redis import Redis, RedisError
-   import os
-   import socket
-   
-   # Connect to Redis
-   redis = Redis(host="redis", db=0, socket_connect_timeout=2, socket_timeout=2)
-   
-   app = Flask(__name__)
-   
-   @app.route("/")
-   def hello():
-     try:
-         visits = redis.incr("counter")
-     except RedisError:
-         visits = "<i>cannot connect to Redis, counter disabled</i>"
-   
-     html = "<h3>Hello {name}!</h3>" \
-            "<b>Hostname:</b> {hostname}<br/>" \
-            "<b>Visits:</b> {visits}"
-     return html.format(name=os.getenv("NAME", "world"), hostname=socket.gethostname(), visits=visits)
-   
-   if __name__ == "__main__":
-     app.run(host='0.0.0.0', port=80)
-   
-   ```
+#### Dockerfile 정의
 
-4. Image 생성
+컨테이너 내부 환경을 정의함
 
-   - docker build -t 명령어를 이용하여 Image를 생성
+런타임 실행 환경에 대한 이미지 파일 생성에 필요한 정보가 들어가 있음
 
-   ```bash
-   docker build -t friendlyhello .
-   ```
+```bash
+# Use an official Python runtime as a parent image
+FROM python:2.7-slim
 
-5. APP 런타임 소스를 실행
+# Set the working directory to /app
+WORKDIR /app
 
-   - docker run -p 명령어를 이용하여 APP을 실행
+# Copy the current directory contents into the container at /app
+ADD . /app
 
-   ```bash
-   docker run -p 4000:80 friendlyhello
-   ```
+# Install any needed packages specified in requirements.txt
+RUN pip install --trusted-host pypi.python.org -r requirements.txt
 
-6. 정상적으로 APP 이 실행되는지 확인
+# Make port 80 available to the world outside this container
+EXPOSE 80
 
-   - localhost:4000 으로 브라우저에서 확인함(실제 0.0.0.0/80 으로 구동이 되었지만 docker에서 run을 할때, 4000 포트로 매핑을 해주었기 때문에 4000 포트로 확인)
-   - 아래 명령어로 실행되고 있는 container 가 있는지 확인
+# Define environment variable
+ENV NAME World
 
-   ```bash
-     docker container ls
-   ```
+# Run app.py when the container launches
+CMD ["python", "app.py"]
+```
 
-7. 실행 중인 컨테이너 중단
 
-   - 아래 명렁어를 통하여 실행중인 컨테이너를 중지 시킴
 
-   ```bash
-   docker container stop [CONTANINER ID]
-   ```
+#### 실제 구동할 APP 런타임 소스 작성
 
-8. [hub.docker.com](https://hub.docker.com/)에 로그인
+requirements.txt
 
-   - 다음 명령어를 통해 hub.docker.com의 계정에 연동
+```txt
+Flask
+Redis
+```
 
-   ```bash
-   $ docker login 
-   ```
+app.py
 
-9. Image에 Tag 하기
+```python
+  from flask import Flask
+from redis import Redis, RedisError
+import os
+import socket
 
-   - 로컬에 있는 Image를 [hub.docker.com](https://hub.docker.com/) 레지스트리에 연결하는 표기법은 `username/repository:tag` 입니다.
+# Connect to Redis
+redis = Redis(host="redis", db=0, socket_connect_timeout=2, socket_timeout=2)
 
-   - Image에 Tag를 추가하는 docker 명령어
+app = Flask(__name__)
 
-     ```bash
-     docker tag image username/repository:tag 
-     ```
+@app.route("/")
+def hello():
+  try:
+      visits = redis.incr("counter")
+  except RedisError:
+      visits = "<i>cannot connect to Redis, counter disabled</i>"
 
-   - For example :
+  html = "<h3>Hello {name}!</h3>" \
+         "<b>Hostname:</b> {hostname}<br/>" \
+         "<b>Visits:</b> {visits}"
+  return html.format(name=os.getenv("NAME", "world"), hostname=socket.gethostname(), visits=visits)
 
-     ```
-     docker tag friendlyhello gordon/get-started:part2
-     ```
+if __name__ == "__main__":
+  app.run(host='0.0.0.0', port=80)
 
+```
+
+
+
+#### Image 생성
+
+docker build -t 명령어를 이용하여 Image를 생성
+
+```bash
+docker build -t friendlyhello .
+```
+
+
+
+#### APP 런타임 소스를 실행
+
+docker run -p 명령어를 이용하여 APP을 실행
+
+```bash
+docker run -p 4000:80 friendlyhello
+```
+
+
+
+#### 정상적으로 APP 이 실행되는지 확인
+
+localhost:4000 으로 브라우저에서 확인함(실제 0.0.0.0/80 으로 구동이 되었지만 docker에서 run을 할때, 4000 포트로 매핑을 해주었기 때문에 4000 포트로 확인)
+
+아래 명령어로 실행되고 있는 container 가 있는지 확인
+
+```bash
+  docker container ls
+```
+
+
+
+#### 실행 중인 컨테이너 중단
+
+아래 명렁어를 통하여 실행중인 컨테이너를 중지 시킴
+
+```bash
+docker container stop [CONTANINER ID]
+```
+
+
+
+#### [hub.docker.com](https://hub.docker.com/)에 로그인
+
+다음 명령어를 통해 hub.docker.com의 계정에 연동
+
+```bash
+$ docker login 
+```
+
+
+
+#### Image에 Tag 하기
+
+로컬에 있는 Image를 [hub.docker.com](https://hub.docker.com/) 레지스트리에 연결하는 표기법은 `username/repository:tag` 입니다.
+
+Image에 Tag를 추가하는 docker 명령어
+
+```bash
+docker tag image username/repository:tag 
+```
+
+For example :
+
+```
+docker tag friendlyhello gordon/get-started:part2
+```
+
+Image에 Tag가 되었는지 확인
+
+```bash
+$ docker image ls
+```
+
+
+
+#### Image 배포 하기
+
+위에 생성한 태그된 이미지를 배포
+
+```bash
+docker push username/repository:tag
+```
+
+docker hub에 로그인이 되어있는 상태라면, docker hub 레파지토리에서 확인 가능
+
+
+
+#### Remote repository 에 있는 Image 로 실행하기
+
+`docker run` 명령어를 이용하여 APP을 실행
+
+```bash
+docker run -p 4000:80 username/repository:tag
+```
+
+만약 로컬 환경에 Image 파일이 없다면, Docker는 remote repository에서 Image 를 pull 해 옵니다.
+
+```bash
+$ docker run -p 4000:80 gordon/get-started:part2
+Unable to find image 'gordon/get-started:part2' locally
+part2: Pulling from gordon/get-started
+10a267c67f42: Already exists
+f68a39a6a5e4: Already exists
+9beaffc0cf19: Already exists
+3c1fe835fb6b: Already exists
+4c9f1fa8fcb8: Already exists
+ee7d8f576a14: Already exists
+fbccdcced46e: Already exists
+Digest: sha256:0601c866aab2adcc6498200efd0f754037e909e5fd42069adeff72d1e2439068
+Status: Downloaded newer image for gordon/get-started:part2
+ * Running on http://0.0.0.0:80/ (Press CTRL+C to quit)
+```
+
+------
+
+### About Service 
+
+분산 어플리케이션에서, APP의 여러 기능을 `서비스` 라고 말한다.
 
 
 

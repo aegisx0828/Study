@@ -1,3 +1,9 @@
+ 
+
+
+
+
+
 Study  
 
 ## 목차  
@@ -216,7 +222,7 @@ docker tag image username/repository:tag
 
 For example :
 
-```
+```bash
 docker tag friendlyhello gordon/get-started:part2
 ```
 
@@ -268,9 +274,130 @@ Status: Downloaded newer image for gordon/get-started:part2
 
 ------
 
-### About Service 
 
-분산 어플리케이션에서, APP의 여러 기능을 `서비스` 라고 말한다.
+
+#### `docker-compose.yml` file
+
+docker에서 확장이 필요한 서비스가 있을때, 서비스를 확장하려면 해당 소프트웨어를 실행하는 컨테이너 인스턴스 수를 변경하여 서비스에 더 많은 컴퓨팅 리소스를 할당하게 합니다. 이럴 경우, Docker 플랫폼으로 서비스를 정의, 실행 및 확장하는 것은 매우 쉽습니다. `docker-compose.yml` 파일을 작성하기 만하면됩니다.
+
+`docker-compose.yml` 파일은 Docker 컨테이너가 운영 환경에서 어떻게 작동해야하는지 정의하는 YAML 파일입니다.
+
+```yaml
+version: "3"
+services:
+  web:
+    # replace username/repo:tag with your name and image details
+    image: username/repo:tag
+    deploy:
+      replicas: 5
+      resources:
+        limits:
+          cpus: "0.1"
+          memory: 50M
+      restart_policy:
+        condition: on-failure
+    ports:
+      - "4000:80"
+    networks:
+      - webnet
+networks:
+  webnet:
+```
+
+위의 `docker-compose.yml` 파일은 Docker에게 다음을 수행하도록 지시합니다.
+
+- 업로드 한 이미지를 레지스트리에서 가져옵니다.
+- 이미지의 5 개의 인스턴스를 `web`이라는 서비스로 실행하고 각 이미지를 최대 10 %의 CPU (모든 코어에서 사용)와 50MB의 RAM으로 제한합니다.
+- 컨테이너 구동이 실패하면 restart 합니다.
+- 호스트의 포트 4000을 `web`이라는 서비스의 포트 80에 매핑합니다.
+- `webnet`이라는 부하 분산 네트워크를 통해 포트 80을 공유하도록 웹의 컨테이너에 설정합니다. (내부적으로 컨테이너는 자체적으로 임시 포트에서 웹 포트 80에 게시됩니다.)
+- 기본 설정으로  `webnet` 네트워크를 정의합니다.
+
+
+
+#### 새로운 load-balanced app 을 실행하기
+
+`docker stack deploy` 명령어를 사용하기 전, 아래 명령어를 먼저 실행합니다.
+
+> Note : `docker swarm init` 를 실행하지 않으면 “this node is not a swarm manager.” 라는 오류가 발생합니다. 
+
+이제 아래 명령어를 통하여, app name을 부여하여 실행합니다.
+
+```bash
+docker stack deploy -c docker-compose.yml getstartedlab
+```
+
+단일 서비스 스택은 배포 된 Image 의 컨테이너 인스턴스 5 개를 하나의 호스트에서 실행합니다.
+
+```bash
+docker service ls
+```
+
+위의 명령어를 통하여 service가 정상적으로 실행이 되는지 확인합니다. (본제본의 갯수, APP 이름,이미지 경로)
+
+서비스에서 실행되는 단일 컨테이너를 Task 라고 합니다. Task 에는 `docker-compose.yml` 에서 정의한 `replicas`  수 만큼 unique ID가 제공됩니다. 서비스의 Task 리스트를 아래 명령어로 확인합니다.
+
+```bash
+docker service ps getstartedlab_web
+```
+
+또한, 특정 서비스를 제한하지 않고, host 시스템에 있는 모든 컨테이너를 확인하려면 아래 명령어를 이용하여 확인할 수 있습니다.
+
+```bash
+docker container ls -q
+```
+
+`curl -4 http : // localhost : 4000` 을 연속으로 여러 번 실행하거나 브라우저에서 해당 URL로 이동하여 몇 번 새로 고침하십시오.
+
+<img width="500" src="https://docs.docker.com/get-started/images/app80-in-browser.png">
+
+어느 쪽이든, 컨테이너 ID가 변경되면서 로드 밸런싱이 실행됩니다. 각 요청마다 5 개의 Task 중 하나가 라운드 로빈 방식으로 응답하도록 선택됩니다. 
+
+
+
+#### Scale the app
+
+`docker-compose.yml` 의 `replicas` 를 변경하고 `docker stack deploy ` 명령을 실행하여 응용 프로그램을 확장 할 수 있습니다.
+
+```bash
+docker stack deploy -c docker-compose.yml getstartedlab
+```
+
+docker는 적절하게 변경된 내용을 적용합니다. 기존에 실행된 stack을 다운시키거나, container 를 제거하지 않고 확장할 수 있습니다.
+
+이제 `docker container ls -q` 를 실행하여 배포 된 인스턴스가 재구성 된 것을 확인합니다. replicas 을 확장하면 더 많은 Task 가 생겨서 더 많은 container 가 시작됩니다.
+
+
+
+#### Take down the app and the swarm
+
+- app 실행 중지
+
+  ```bash
+  docker stack rm getstartedlab
+  ```
+
+- Swarm 을 중지
+
+  ```bash
+  docker swarm leave --force
+  ```
+
+------
+
+
+
+### Get Started, Part 4: Swarms
+
+------
+
+
+
+#### Understanding Swarm clusters
+
+
+
+
 
 
 
@@ -279,6 +406,4 @@ Status: Downloaded newer image for gordon/get-started:part2
 ## 3. 쓸데없는 개발 참조
 
 - MAC 터미널 글꼴 색상 적용 : [링크](http://minus-build.tistory.com/23)
-- Oracle VirtualBox 설치 : [링크](https://hongku.tistory.com/178)
-
-
+- Oracle VirtualBox 설치 : [링크](
